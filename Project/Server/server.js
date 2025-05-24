@@ -4,9 +4,12 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import http from 'http';
 import "dotenv/config";
+import routes from './src/routes/index.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+app.use("/api/v1", routes);
 
 app.use(cors());
 app.use(express.json());
