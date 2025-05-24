@@ -16,4 +16,4 @@ export const {
     setThemeMode
 } = themeModeSlice.actions;
 
-export default userSlice.reducer;
+export default themeModeSlice.reducer;
