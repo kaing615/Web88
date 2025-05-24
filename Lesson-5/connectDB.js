@@ -1,4 +1,4 @@
-const mongoConnectString = 'mongodb+srv://kainguyen615:uk4gIpLqxQb0YGSM@learn-web88.qiwtt8a.mongodb.net/lesson-5'
+const mongoConnectString = 'mongodb+srv://kainguyen615:uk4gIpLqxQb0YGSM@learn-web88.qiwtt8a.mongodb.net/lesson-5' 
 
 import mongoose from "mongoose";
 

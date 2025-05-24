@@ -69,34 +69,6 @@
       "quantity": 150
     }
   ],
-  "orders": [
-    {
-      "id": "1",
-      "customerId": 1,
-      "productId": 2,
-      "quantity": 1,
-      "totalPrice": 699.99
-    },
-    {
-      "id": "2",
-      "customerId": 2,
-      "productId": 3,
-      "quantity": 2,
-      "totalPrice": 399.98
-    },
-    {
-      "id": "3",
-      "customerId": 3,
-      "productId": 1,
-      "quantity": 1,
-      "totalPrice": 999.99
-    },
-    {
-      "id": "4",
-      "customerId": 4,
-      "productId": 4,
-      "quantity": 1,
-      "totalPrice": 299.99
-    }
-  ]
+  "orders": 5
+  
 }
