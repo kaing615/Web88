@@ -1,7 +1,7 @@
 import React from "react";
 
-function PasswordUpdate() {
+const PasswordUpdate = () => {
   return <div>PasswordUpdate</div>;
-}
+};
 
 export default PasswordUpdate;

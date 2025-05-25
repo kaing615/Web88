@@ -1,7 +1,7 @@
 import React from "react";
 
-function HomePage() {
-  return <div style={{ fontSize: 32, color: "red" }}>IT WORKS BRO!!!</div>;
-}
+const HomePage = () => {
+  return <div>HomePage</div>;
+};
 
 export default HomePage;

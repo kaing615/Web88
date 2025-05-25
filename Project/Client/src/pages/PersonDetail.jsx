@@ -1,7 +1,7 @@
 import React from "react";
 
-function PersonDetail() {
+const PersonDetail = () => {
   return <div>PersonDetail</div>;
-}
+};
 
 export default PersonDetail;
