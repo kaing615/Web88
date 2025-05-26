@@ -41,7 +41,7 @@ router.post(
 )
 
 router.post(
-    "/login",
+    "/signin",
     body("username")
         .exists().withMessage("Username is required")
         .isLength({ min: 1 }).withMessage("Username cannot be empty"),

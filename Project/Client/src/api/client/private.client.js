@@ -1,8 +1,7 @@
-import React from 'react'
 import axios from 'axios';
 import queryString from 'query-string';
 
-const baseURL = "https://127.0.0.1:5050/api/v1";
+const baseURL = "http://127.0.0.1:5050/api/v1";
 
 const privateClient = axios.create({
     baseURL,
@@ -11,24 +10,28 @@ const privateClient = axios.create({
     }
 });
 
-privateClient.interceptors.request(async config => {
-    return {
-        ...config,
-        headers: {
+privateClient.interceptors.request.use(
+    async (config) => {
+        config.headers = {
             ...config.headers,
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('actkn')}`
-        }
-    }
-});
+        };
+        return config;
+    },
+    (error) => Promise.reject(error)
+);
 
-privateClient.interceptors.response.use((response) => {
-    if (response && response.data) {
-        return response.data;
+privateClient.interceptors.response.use(
+    (response) => {
+        if (response && response.data) {
+            return response.data;
+        }
+        return response;
+    },
+    (error) => {
+        throw error.response.data;
     }
-    return response;
-}, (error) => {
-    throw error.response.data;
-});
+);
 
 export default privateClient;

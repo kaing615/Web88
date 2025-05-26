@@ -1,6 +1,5 @@
 const responseWithData = (res, statusCode, data) => {
     res.status(statusCode).json({
-        status: statusCode,
         data: data
     });
 }
@@ -12,7 +11,7 @@ const error = (res) => responseWithData(res, 500, {
 
 const badRequest = (res, message) => responseWithData(res, 400, {
     status: 400,
-    message: message || "Bad Request",
+    message: message,
 });
 
 const ok = (res, data) => responseWithData(res, 200, data)
@@ -26,7 +25,7 @@ const unauthorized = (res, message) => responseWithData(res, 401, {
 
 const notFound = (res, message) => responseWithData(res, 404, {
     status: 404,
-    message: message || "Not Found",
+    message: "Resource not found",
 });
 
 export default {

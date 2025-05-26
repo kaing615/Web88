@@ -9,7 +9,7 @@ const userEndpoints = {
 }
 
 const userApi = {
-    signin: async ({}) => {
+    signin: async ({username, password}) => {
         try {
             const response = await publicClient.post(
                 userEndpoints.signin,
@@ -18,7 +18,10 @@ const userApi = {
 
             return { response };
         } catch (error) {
-            return { error };
+            const msg = error?.response?.data?.message
+                || error?.response?.data?.data?.message
+                || "Đăng nhập thất bại";
+            return { error: msg };
         }
     },
 
