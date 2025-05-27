@@ -1,5 +1,6 @@
 import { createTheme } from '@mui/material/styles';
 import { colors } from '@mui/material';
+import { teal, orange } from '@mui/material/colors';
 
 export const themeModes = {
     dark: "dark",
@@ -8,13 +9,16 @@ export const themeModes = {
 
 const themeConfigs = {
     custom: ({mode}) => {
+        const primaryC = teal[500]; 
+        const secondaryC = orange[700]; 
+
         const customPallete = mode === themeModes.dark ? {
             primary: {
-                main: "#ff0000",
+                main: primaryC,
                 contrastText: "#ffffff",
             },
             secondary: {
-                main: "#f44336",
+                main: secondaryC,
                 contrastText: "#ffffff",
             },
             background: {
@@ -23,10 +27,10 @@ const themeConfigs = {
             }
         } : {
             primary: {
-                main: "#ff0000",
+                main: primaryC,
             },
             secondary: {
-                main: "#f44336",
+                main: secondaryC,
             },
             background: {
                 default: colors.grey['100'],

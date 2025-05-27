@@ -42,6 +42,20 @@ const signIn = async (req, res) => {
         if (!user) return responseHandler.badRequest(res, "Invalid username or password");
         if (!user.validatePassword(password)) return responseHandler.badRequest(res, "Invalid username or password");
          
+        const token = jsonwebtoken.sign(
+            { data: user.id },
+            process.env.TOKEN_SECRET,
+            { expiresIn: "24h" }
+        );
+
+        user.password = undefined; 
+        user.salt = undefined;
+        
+        responseHandler.created(res, {
+            token,
+            ...user._doc,
+            id: user.id,
+        })
     } catch (error) {
         responseHandler.error(res);
     }

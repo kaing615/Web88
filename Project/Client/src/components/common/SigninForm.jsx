@@ -32,6 +32,7 @@ const SigninForm = ({ switchAuthState }) => {
       setErrorMessage(undefined);
       setIsLoginRequest(true);
       const { response, error } = await userApi.signin(values);
+      console.log("API response:", response);
       setTimeout(() => {
         setIsLoginRequest(false);
       }, 300);
@@ -110,7 +111,9 @@ const SigninForm = ({ switchAuthState }) => {
         {errorMessage && (
           <Box sx={{ marginTop: 2 }}>
             <Alert severity="error" variant="outlined">
-              {errorMessage}
+              {errorMessage?.data?.message ||
+                errorMessage?.message ||
+                "An error occurred. Please try again."}
             </Alert>
           </Box>
         )}

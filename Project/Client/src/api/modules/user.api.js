@@ -16,12 +16,10 @@ const userApi = {
                 { username, password }
             );
 
-            return { response };
+            return { response: response.data };
         } catch (error) {
-            const msg = error?.response?.data?.message
-                || error?.response?.data?.data?.message
-                || "Đăng nhập thất bại";
-            return { error: msg };
+            console.log(error);
+            return { error };
         }
     },
 
@@ -32,19 +30,18 @@ const userApi = {
                 { username, password, confirmPassword, displayName }
             );
 
-            return { response };
+            return { response: response.data };
         } catch (error) {
             return { error };
         }
     },
 
-    getInfo: async ({}) => {
+    getInfo: async () => {
         try {
             const response = await privateClient.get(
                 userEndpoints.getInfo
             );
-
-            return { response };
+            return { response: response.data };
         } catch (error) {
             return { error };
         }

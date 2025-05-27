@@ -1,4 +1,5 @@
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import {
   ListItemButton,
   ListItemIcon,
@@ -30,16 +31,20 @@ const UserMenu = () => {
             sx={{
               cursor: "pointer",
               userSelect: "none",
+              display: "flex", // Thêm flex
+              alignItems: "center", // Thêm cho đẹp
+              gap: 0.5, // Khoảng cách với icon
             }}
             onClick={toggleMenu}
           >
             {user.displayName}
+            <ArrowDropDownIcon fontSize="large" sx={{ ml: 1 }} />
           </Typography>
           <Menu
             open={Boolean(anchorEl)}
             anchorEl={anchorEl}
             onClose={() => setAnchorEl(null)}
-            PaperProps={{ sx: { padding: 0 } }}
+            slotProps={{ paper: { sx: { padding: 0 } } }}
           >
             {menuConfigs.user.map((item, index) => (
               <ListItemButton
@@ -65,9 +70,9 @@ const UserMenu = () => {
               }}
               onClick={() => dispatch(setUser(null))}
             >
-              <ListItemButton>
+              <ListItemIcon>
                 <LogoutOutlinedIcon />
-              </ListItemButton>
+              </ListItemIcon>
               <ListItemText
                 disableTypography
                 primary={

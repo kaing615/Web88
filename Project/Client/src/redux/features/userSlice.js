@@ -1,18 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const savedUser = JSON.parse(localStorage.getItem('userInfo') || 'null');
+
 export const userSlice = createSlice({
     name: 'User',
     initialState: {
-        user: null,
-        listFavorites: [],
+        user: savedUser,
+        listFavorites: []
     },
     reducers: {
         setUser: (state, action) => {
             if (action.payload === null) {
                 localStorage.removeItem('actkn');
+                localStorage.removeItem('userInfo');
             } else {
                 if (action.payload.token) {
                     localStorage.setItem('actkn', action.payload.token);
+                    localStorage.setItem('userInfo', JSON.stringify(action.payload));
                 }
             }
 
