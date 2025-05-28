@@ -13,7 +13,8 @@ const mediaApi = {
             const response = await publicClient.get(
                 mediaEndpoints.list({ mediaType, mediaCategory, page })
             );
-            return { response: response.data };
+            console.log("response getList: ", response);
+            return { response: response };
         } catch (error) {
             return { error };
         }
@@ -23,7 +24,8 @@ const mediaApi = {
             const response = await privateClient.get(
                 mediaEndpoints.detail({ mediaType, mediaId })
             );
-            return { response: response.data };
+            console.log("response getDetail: ", response);
+            return { response: response };
         } catch (error) {
             return { error };
         }
@@ -33,7 +35,8 @@ const mediaApi = {
             const response = await publicClient.get(
                 mediaEndpoints.search({ mediaType, query, page })
             );
-            return { response: response.data };
+            console.log("response search: ", response);
+            return { response: response };
         } catch (error) {
             return { error };
         }

@@ -1,12 +1,12 @@
-import HomePage from "../pages/HomePage.jsx";
-import PersonDetail from "../pages/PersonDetail.jsx";
-import FavoriteList from "../pages/FavoriteList.jsx";
-import MediaList from "../pages/MediaList.jsx";
-import MediaDetail from "../pages/MediaDetail.jsx";
-import MediaSearch from "../pages/MediaSearch.jsx";
-import ReviewList from "../pages/ReviewList.jsx";
-import PasswordUpdate from "../pages/PasswordUpdate.jsx";
-import ProtectedPage from "../components/common/ProtectedPage.jsx";
+import HomePage from "../pages/HomePage";
+import PersonDetail from "../pages/PersonDetail";
+import FavoriteList from "../pages/FavoriteList";
+import MediaList from "../pages/MediaList";
+import MediaDetail from "../pages/MediaDetail";
+import MediaSearch from "../pages/MediaSearch";
+import ReviewList from "../pages/ReviewList";
+import PasswordUpdate from "../pages/PasswordUpdate";
+import ProtectedPage from "../components/common/ProtectedPage";
 
 export const routesGen = {
   home: "/",

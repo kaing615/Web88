@@ -31,13 +31,15 @@ const uiConfigs = {
             margin: "auto",
             padding: 2
         },
-        backgroundImage: {
+        backgroundImage: (imgPath) => ({
             position: "relative",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundColor: "darkgrey",
-            //backgroundImage: `url(${imgPath})`
-        },
+            backgroundImage: imgPath
+                ? `url(https://image.tmdb.org/t/p/w500${imgPath})`
+                : "none",
+        }),
         size: {
             sidebarWidth: "300px",
             contentMaxWidth: "1366px",

@@ -1,5 +1,5 @@
 import responseHandler from "../handlers/response.handler.js";
-import tmdpApi from "../tmdb/tmdb.api.js";
+import tmdbApi from "../tmdb/tmdb.api.js";
 import userModel from "../models/user.model.js";
 import favoriteModel from "../models/favorite.model.js";
 import reviewModel from "../models/review.model.js";
@@ -10,7 +10,7 @@ const getList = async (req, res) => {
         const { page } = req.query;
         const { mediaType, mediaCategory } = req.params;
 
-        const response = await tmdpApi.mediaList({
+        const response = await tmdbApi.mediaList({
             mediaType,
             mediaCategory,
             page: page ? parseInt(page) : 1
@@ -26,12 +26,13 @@ const getGenres = async (req, res) => {
     try {
         const { mediaType } = req.params;
 
-        const response = await tmdpApi.mediaGenres({
+        const response = await tmdbApi.mediaGenres({
             mediaType
         });
 
         return responseHandler.ok(res, response);
     } catch (error) {
+        console.log("Error in getGenres:", error);
         responseHandler.error(res);
     }
 }
@@ -41,7 +42,7 @@ const search = async (req, res) => {
         const { query, page } = req.query;
         const { mediaType } = req.params;
 
-        const response = await tmdpApi.mediaSearch({
+        const response = await tmdbApi.mediaSearch({
             query,
             page,
             mediaType: mediaType === "people" ? "person" : mediaType
@@ -62,16 +63,16 @@ const getDetail = async (req, res) => {
             mediaId
         }; 
 
-        const media = await tmdpApi.mediaDetail(params);
-        media.credits = await tmdpApi.mediaCredits(params);
+        const media = await tmdbApi.mediaDetail(params);
+        media.credits = await tmdbApi.mediaCredits(params);
 
-        const videos = await tmdpApi.mediaVideos(params);
+        const videos = await tmdbApi.mediaVideos(params);
         media.videos = videos;
 
-        const recommend = await tmdpApi.mediaRecommend(params);
+        const recommend = await tmdbApi.mediaRecommend(params);
         media.recommend = recommend.results;
 
-        const images = await tmdpApi.mediaImages(params);
+        const images = await tmdbApi.mediaImages(params);
         media.images = images;
 
         const tokenDecoded = tokenMiddleware.tokenDecode(req);

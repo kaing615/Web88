@@ -1,13 +1,13 @@
 import responseHandler from "../handlers/response.handler.js";
 import reviewModel from "../models/review.model.js";
-import tmdpApi from "../tmdb/tmdb.api.js";
+import tmdbApi from "../tmdb/tmdb.api.js";
 
 const create = async (req, res) => {
     try {
         const { movieId } = req.params;
 
         const review = new reviewModel({
-            user: req.user._id,
+            user: req.user.id,
             movieId,
             ...req.body
         });
@@ -37,7 +37,7 @@ const remove = async (req, res) => {
             return responseHandler.notFound(res);
         }
 
-        await reviewModel.remove();
+        await review.remove();
 
         responseHandler.ok(res);
     } catch (error) {

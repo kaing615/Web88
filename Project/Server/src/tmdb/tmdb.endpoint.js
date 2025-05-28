@@ -7,7 +7,7 @@ const tmdbEndpoints = {
         page
     }) => {
         return tmdbConfig.getUrl(
-            `${mediaType}/${mediaCategory}`, page
+            `${mediaType}/${mediaCategory}`, {page}
         )
     },
     mediaDetail: ({

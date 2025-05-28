@@ -1,7 +1,15 @@
 import { Box, Typography, CircularProgress } from "@mui/material";
-import { cyan } from "@mui/material/colors";
+
+const getColor = (value) => {
+  if (value <= 5) return "#e53935";      // đỏ
+  if (value < 7) return "#fb8c00";      // cam
+  return "#00fff0";                    // xanh dương
+};
 
 const CircularRate = ({ value }) => {
+  // value: 1-10 (của TMDB là 0-10)
+  const color = getColor(value);
+
   return (
     <Box
       sx={{
@@ -14,7 +22,10 @@ const CircularRate = ({ value }) => {
         variant="determinate"
         value={value * 10}
         size={50}
-        color="cyan[500]"
+        thickness={5}
+        sx={{
+          color, // custom màu
+        }}
       />
       <Box
         sx={{
