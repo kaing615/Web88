@@ -17,7 +17,7 @@ const tmdpApi = {
         mediaType,
         mediaId
     }) => axiosClient.get(
-        tmdbEndpoints.mediaDetails({
+        tmdbEndpoints.mediaDetail({
             mediaType,
             mediaId
         })

@@ -3,7 +3,7 @@ import privateClient from "../client/private.client";
 const  favoriteEndpoints = {
     list: "user/favorites",
     add: "user/favorites",
-    remove: ({ favoriteId}) => `user/favorites/${favoriteId}`,
+    remove: ({ favoriteId }) => `user/favorites/${favoriteId}`,
 }
 
 const favoriteApi = {
@@ -23,12 +23,12 @@ const favoriteApi = {
         mediaType, 
         mediaTitle, 
         mediaPoster,
-        imdbRating
+        imdbRate
     }) => {
         try {
             const response = await privateClient.post(
                 favoriteEndpoints.add,
-                { mediaId, mediaType, mediaTitle, mediaPoster, imdbRating }
+                { mediaId, mediaType, mediaTitle, mediaPoster, imdbRate }
             );
 
             return { response };

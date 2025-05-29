@@ -26,9 +26,14 @@ export const userSlice = createSlice({
             state.listFavorites = action.payload;
         },
         removeFavorite: (state, action) => {
-            const { mediaId } = action.payload;
-            state.listFavorites = [...state.listFavorites]
-            .filter(e => e.mediaId.toString() !== mediaId.toString());
+            // Có thể là string hoặc object
+            const removeId = typeof action.payload === "object"
+                ? action.payload.mediaId
+                : action.payload;
+        
+            state.listFavorites = state.listFavorites.filter(
+                (e) => e.mediaId.toString() !== removeId.toString()
+            );
         },
         addFavorite: (state, action) => {
             state.listFavorites = [action.payload, ...state.listFavorites];

@@ -9,7 +9,6 @@ const favoriteSchema = new mongoose.Schema({
     },
     content: {
         type: String,
-        required: true,
         trim: true
     },
     mediaType: {
@@ -29,7 +28,7 @@ const favoriteSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    imdbRating: {
+    imdbRate: {
         type: Number,
         min: 0,
         max: 10

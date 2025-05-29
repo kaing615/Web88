@@ -7,6 +7,7 @@ const responseWithData = (res, statusCode, data) => {
 const error = (res) => responseWithData(res, 500, {
     status: 500,
     message: "Oops! Something went wrong",
+    error: error,
 });
 
 const badRequest = (res, message) => responseWithData(res, 400, {

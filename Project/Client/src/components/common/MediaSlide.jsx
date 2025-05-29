@@ -11,6 +11,7 @@ import MediaItem from "./MediaItem";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
+import { useSelector } from "react-redux";
 
 const MediaSlide = ({ mediaType, mediaCategory }) => {
   const [medias, setMedias] = useState([]);
@@ -19,6 +20,8 @@ const MediaSlide = ({ mediaType, mediaCategory }) => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const { listFavorites } = useSelector((state) => state.user);
 
   useEffect(() => {
     setLoading(true);
@@ -34,6 +37,18 @@ const MediaSlide = ({ mediaType, mediaCategory }) => {
     };
     getMedias();
   }, [mediaType, mediaCategory]);
+
+  useEffect(() => {
+    if (medias.length && listFavorites.length) {
+      const liked = medias.filter((media) =>
+        listFavorites.some(
+          (fav) =>
+            fav.mediaId.toString() === (media.id || media.mediaId).toString()
+        )
+      );
+      console.log("Phim đã thích:", liked);
+    }
+  }, [medias, listFavorites]);
 
   // Lưu lại số slide thực tế
   const slideCount = medias.length;
@@ -169,7 +184,7 @@ const MediaSlide = ({ mediaType, mediaCategory }) => {
         }
         .media-slide-card-min:hover {
           transform: scale(1.08) translateY(-6px);
-          box-shadow: 0 16px 48px rgba(80,30,160,0.17), 0 4px 28px #ff1f7533;
+          box-shadow: 0 16px 48px rgba(80,30,160,0.2), 0 4px 28px #ff1f7533;
         }
         `}
       </style>

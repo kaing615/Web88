@@ -10,7 +10,6 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import CircularRate from "./CircularRate";
 
-// Lấy url poster, có fallback
 const getPosterUrl = (posterPath) => {
   if (!posterPath) return "/fallback.jpg";
   return `https://image.tmdb.org/t/p/w500${posterPath}`;
@@ -32,7 +31,6 @@ const MediaItem = ({ media, mediaType }) => {
         media.profile_path ||
         media.mediaPoster
     );
-
     if (mediaType === tmdbConfigs.mediaType.movie) {
       setReleaseDate(media.release_date && media.release_date.split("-")[0]);
     } else {
@@ -41,9 +39,9 @@ const MediaItem = ({ media, mediaType }) => {
       );
     }
     setRate(media.vote_average || media.imdbRate || media.mediaRate);
+    console.log("Favorite list:", listFavorites);
   }, [media, mediaType]);
 
-  // Style đẹp hơn
   return (
     <Link
       to={
@@ -62,16 +60,25 @@ const MediaItem = ({ media, mediaType }) => {
           overflow: "hidden",
           position: "relative",
           cursor: "pointer",
-          transition: "transform 0.3s cubic-bezier(.4,2,.6,1), box-shadow 0.3s",
+          transition:
+            "transform 0.22s cubic-bezier(.42,1,.46,1.14), box-shadow 0.17s",
+          willChange: "transform, box-shadow",
           "&:hover": {
-            transform: "scale(1.05) translateY(-4px)",
-            boxShadow: "0 16px 40px rgba(0,0,0,0.32)",
+            transform: "scale(1.035) translateY(-3px)",
+            boxShadow: "0 12px 32px rgba(0,0,0,0.29)",
           },
           "&:hover .media-info": {
             opacity: 1,
             bottom: 0,
           },
-          "&:hover .media-backdrop, &:hover .media-play-btn": {
+          "&:hover .media-backdrop": {
+            opacity: 1,
+          },
+          "&:hover .media-play-btn": {
+            opacity: 1,
+            transform: "translate(-50%,-55%) scale(1.11)",
+          },
+          "&:hover .media-favorite-icon": {
             opacity: 1,
           },
           color: "primary.contrastText",
@@ -81,14 +88,23 @@ const MediaItem = ({ media, mediaType }) => {
         {mediaType !== "people" &&
           favoriteUtils.check({ listFavorites, mediaId: media.id }) && (
             <FavoriteIcon
-              color="error"
+              color="primary"
+              className="media-favorite-icon"
               sx={{
                 position: "absolute",
-                top: 10,
-                right: 10,
+                right: 15,
+                bottom: 15,
                 fontSize: "2rem",
-                zIndex: 2,
-                filter: "drop-shadow(0 1px 4px rgba(0,0,0,0.25))",
+                zIndex: 999,
+                filter: "drop-shadow(0 1px 4px rgba(0,0,0,0.18))",
+                opacity: 0, // <-- Luôn hiện, hover có thể tăng sáng hoặc scale
+                transition: "opacity 0.18s, transform 0.2s",
+                pointerEvents: "none", // Để không cản các nút khác
+                // Hiệu ứng sáng hơn khi hover (tuỳ ý)
+                "&:hover": {
+                  opacity: 1,
+                  transform: "scale(1.11)",
+                },
               }}
             />
           )}
@@ -98,14 +114,15 @@ const MediaItem = ({ media, mediaType }) => {
           className="media-backdrop"
           sx={{
             opacity: 0,
-            transition: "opacity 0.35s",
+            transition: "opacity 0.16s",
+            willChange: "opacity",
             width: "100%",
             height: "100%",
             position: "absolute",
             top: 0,
             left: 0,
             background:
-              "linear-gradient(to top, rgba(20,20,25,0.92) 70%, rgba(0,0,0,0) 100%)",
+              "linear-gradient(to top, rgba(22,22,30,0.90) 80%, rgba(0,0,0,0.06) 100%)",
             zIndex: 1,
           }}
         />
@@ -117,22 +134,23 @@ const MediaItem = ({ media, mediaType }) => {
             position: "absolute",
             top: "50%",
             left: "50%",
-            transform: "translate(-50%,-50%)",
-            bgcolor: "rgba(0,201,167,0.85)", // xanh ngọc trong suốt
+            transform: "translate(-50%,-50%) scale(1)",
+            bgcolor: "rgba(0,201,167,0.80)",
             color: "#fff",
             opacity: 0,
             zIndex: 2,
-            boxShadow: "0 0 20px 2px #00C9A799, 0 2px 30px 6px #1DE9B666",
+            boxShadow: "0 0 8px 0 #00C9A75a",
+            willChange: "opacity, transform",
             transition:
-              "opacity 0.3s, filter 0.4s, transform 0.33s cubic-bezier(.8,.2,.2,1.2)",
+              "opacity 0.15s, transform 0.18s cubic-bezier(.7,.2,.2,1.2)",
             "&:hover": {
               bgcolor: "#fff",
               color: "#00C9A7",
-              filter: "drop-shadow(0 0 32px #00C9A7cc) brightness(1.20)",
+              boxShadow: "0 0 18px #00C9A777",
             },
           }}
         >
-          <PlayArrowIcon sx={{ fontSize: 40 }} />
+          <PlayArrowIcon sx={{ fontSize: 32 }} />
         </IconButton>
 
         {/* Thông tin phim */}
@@ -141,14 +159,15 @@ const MediaItem = ({ media, mediaType }) => {
           sx={{
             position: "absolute",
             left: 0,
-            bottom: "-20px",
+            bottom: "-16px",
             width: "100%",
             opacity: 0,
             zIndex: 2,
-            padding: "18px 12px 12px 12px",
-            background: "rgba(16,18,24,0.84)",
+            p: "13px 10px 10px 10px",
+            background: "rgba(16,18,24,0.82)",
             color: "#fff",
-            transition: "all 0.4s cubic-bezier(.7,.3,.1,1)",
+            transition: "opacity 0.18s, bottom 0.18s cubic-bezier(.7,.3,.1,1)",
+            willChange: "opacity, bottom",
             display: "flex",
             flexDirection: "column",
             gap: 1,
@@ -175,7 +194,7 @@ const MediaItem = ({ media, mediaType }) => {
               height: "max-content",
               bottom: 0,
               padding: "10px",
-              backgroundColor: "rgba(0, 0, 0, 0.6)",
+              backgroundColor: "rgba(0, 0, 0, 0.58)",
             }}
           >
             <Typography sx={{ ...uiConfigs.style.typoLines(1, "left") }}>

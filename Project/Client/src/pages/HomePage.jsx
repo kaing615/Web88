@@ -5,8 +5,24 @@ import uiConfigs from "../configs/ui.configs";
 import Container from "../components/common/Container";
 import { Box } from "@mui/material";
 import MediaSlide from "../components/common/MediaSlide";
+import favoriteApi from "../api/modules/favorite.api";
+import { useDispatch } from "react-redux";
+import { setListFavorites } from "../redux/features/userSlice";
+import { useEffect } from "react";
 
 const HomePage = () => {
+  const dispatch = useDispatch();
+
+  // Sau khi đăng nhập thành công hoặc vào trang home/profile
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      const { response } = await favoriteApi.getList();
+      if (response) {
+        dispatch(setListFavorites(response.data));
+      }
+    };
+    fetchFavorites();
+  }, [dispatch]);
   return (
     <>
       <HeroSlide
