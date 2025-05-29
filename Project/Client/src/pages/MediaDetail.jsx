@@ -13,6 +13,8 @@ import CircularRate from "../components/common/CircularRate";
 import Container from "../components/common/Container";
 import ImageHeader from "../components/common/ImageHeader";
 import CastSlide from "../components/common/CastSlide";
+import MediaVideosSlide from "../components/common/MediaVideosSlide";
+import BackdropSlide from "../components/common/BackdropSlide";
 
 import tmdbConfigs from "../api/configs/tmdb.configs";
 import uiConfigs from "../configs/ui.configs";
@@ -270,6 +272,17 @@ const MediaDetail = () => {
             {/* Media Poster */}
           </Box>
         </Box>
+        <div ref={videoRef} style={{ paddingTop: "2rem" }}>
+          <Container header="Videos">
+            <MediaVideosSlide videos={media.videos.results.splice(0, 5)} />
+          </Container>
+        </div>
+
+        {media.images.backdrops.length > 0 && (
+          <Container header="Backdrops">
+            <BackdropSlide backdrops={media.images.backdrops} />
+          </Container>
+        )}
       </Box>
     </>
   ) : null;
