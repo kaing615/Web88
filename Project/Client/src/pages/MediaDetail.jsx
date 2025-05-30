@@ -14,7 +14,7 @@ import Container from "../components/common/Container";
 import ImageHeader from "../components/common/ImageHeader";
 import CastSlide from "../components/common/CastSlide";
 import MediaVideosSlide from "../components/common/MediaVideosSlide";
-import BackdropSlide from "../components/common/BackdropSlide";
+import RecommendSlide from "../components/common/RecommendSlide";
 
 import tmdbConfigs from "../api/configs/tmdb.configs";
 import uiConfigs from "../configs/ui.configs";
@@ -28,6 +28,8 @@ import {
   removeFavorite,
   setListFavorites,
 } from "../redux/features/userSlice";
+import MediaSlide from "../components/common/MediaSlide";
+import MediaReview from "../components/common/MediaReview";
 
 const MediaDetail = () => {
   const dispatch = useDispatch();
@@ -278,11 +280,25 @@ const MediaDetail = () => {
           </Container>
         </div>
 
-        {media.images.backdrops.length > 0 && (
-          <Container header="Backdrops">
-            <BackdropSlide backdrops={media.images.backdrops} />
-          </Container>
-        )}
+        {/* Media reviews */}
+        <MediaReview
+          reviews={media.reviews}
+          media={media}
+          mediaType={mediaType}
+        />
+        {/* Media reviews */}
+
+        <Container header="You may also like">
+          {media.recommend.length > 0 && (
+            <RecommendSlide medias={media.recommend} mediaType={mediaType} />
+          )}
+          {media.recommend.length === 0 && (
+            <MediaSlide
+              mediaType={mediaType}
+              mediaCategory={tmdbConfigs.mediaCategory.top_rated}
+            />
+          )}
+        </Container>
       </Box>
     </>
   ) : null;

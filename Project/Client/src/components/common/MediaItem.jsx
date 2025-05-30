@@ -39,7 +39,6 @@ const MediaItem = ({ media, mediaType }) => {
       );
     }
     setRate(media.vote_average || media.imdbRate || media.mediaRate);
-    console.log("Favorite list:", listFavorites);
   }, [media, mediaType]);
 
   return (

@@ -13,11 +13,12 @@ const create = async (req, res) => {
         });
 
         await review.save();
+        await review.populate("user");
 
         responseHandler.created(res, {
             ...review._doc,
             id: review.id,
-            user: req.user
+            user: review.user
         })
     } catch (error) {
         responseHandler.error(res, error);
@@ -49,7 +50,7 @@ const getReviewsOfUser = async (req, res) => {
     try {
         const reviews = await reviewModel.find({
             user: req.user.id
-        }).sort("-createdAt");
+        }).populate("user").sort("-createdAt");
 
         responseHandler.ok(res, reviews);
     } catch (error) {
