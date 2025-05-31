@@ -38,7 +38,7 @@ const remove = async (req, res) => {
             return responseHandler.notFound(res);
         }
 
-        await review.remove();
+        await review.deleteOne();
 
         responseHandler.ok(res);
     } catch (error) {

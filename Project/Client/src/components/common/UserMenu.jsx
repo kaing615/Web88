@@ -11,16 +11,24 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import menuConfigs from "../../configs/menu.configs";
 import { setUser } from "../../redux/features/userSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Thêm useNavigate
+import TextAvatar from "./TextAvatar";
 
 const UserMenu = () => {
   const { user } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Khai báo navigate
 
   const [anchorEl, setAnchorEl] = useState(null);
 
   const toggleMenu = (e) => setAnchorEl(e.currentTarget);
+
+  const handleLogout = () => {
+    dispatch(setUser(null));
+    setAnchorEl(null);
+    navigate("/"); // Chuyển về home sau khi logout
+  };
 
   return (
     <>
@@ -31,20 +39,19 @@ const UserMenu = () => {
             sx={{
               cursor: "pointer",
               userSelect: "none",
-              display: "flex", // Thêm flex
-              alignItems: "center", // Thêm cho đẹp
-              gap: 0.5, // Khoảng cách với icon
+              display: "flex",
+              alignItems: "center",
+              gap: 0.5,
             }}
             onClick={toggleMenu}
           >
-            {user.displayName}
-            <ArrowDropDownIcon fontSize="large" sx={{ ml: 1 }} />
+            <TextAvatar text={user.displayName} />
           </Typography>
           <Menu
             open={Boolean(anchorEl)}
             anchorEl={anchorEl}
             onClose={() => setAnchorEl(null)}
-            slotProps={{ paper: { sx: { padding: 0 } } }}
+            slotProps={{ paper: { sx: { padding: 0, marginTop: 1 } } }}
           >
             {menuConfigs.user.map((item, index) => (
               <ListItemButton
@@ -65,10 +72,8 @@ const UserMenu = () => {
               </ListItemButton>
             ))}
             <ListItemButton
-              sx={{
-                borderRadius: "10px",
-              }}
-              onClick={() => dispatch(setUser(null))}
+              sx={{ borderRadius: "10px" }}
+              onClick={handleLogout}
             >
               <ListItemIcon>
                 <LogoutOutlinedIcon />

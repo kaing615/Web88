@@ -13,6 +13,7 @@ export const userSlice = createSlice({
             if (action.payload === null) {
                 localStorage.removeItem('actkn');
                 localStorage.removeItem('userInfo');
+                state.listFavorites = [];
             } else {
                 if (action.payload.token) {
                     localStorage.setItem('actkn', action.payload.token);

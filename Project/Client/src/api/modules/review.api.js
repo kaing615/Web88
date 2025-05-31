@@ -28,7 +28,7 @@ const reviewApi = {
                 }
             );
 
-            return { response };
+            return { response: response.data };
         } catch (error) {
             return { error };
         }

@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import userApi from "../../api/modules/user.api";
 import favoriteApi from "../../api/modules/favorite.api";
 import { setListFavorites, setUser } from "../../redux/features/userSlice";
+import "../styles/scrollbar.css";
 
 function MainLayout() {
   const dispatch = useDispatch();

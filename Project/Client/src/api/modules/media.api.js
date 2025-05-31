@@ -13,7 +13,6 @@ const mediaApi = {
             const response = await publicClient.get(
                 mediaEndpoints.list({ mediaType, mediaCategory, page })
             );
-            console.log("response getList: ", response);
             return { response: response };
         } catch (error) {
             return { error };

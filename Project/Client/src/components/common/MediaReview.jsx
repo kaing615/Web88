@@ -25,11 +25,11 @@ const ReviewItem = ({ review, onRemoved }) => {
     if (onRequest) return;
     setOnRequest(true);
 
-    const { response, err } = await reviewApi.remove({ reviewId: review.id });
+    const { response, error } = await reviewApi.remove({ reviewId: review.id });
 
     setOnRequest(false);
 
-    if (err) toast.error(err.message);
+    if (error) toast.error(error.message || "Remove review failed!");
     if (response) onRemoved(review.id);
   };
 
@@ -118,16 +118,14 @@ const MediaReview = ({ reviews, media, mediaType }) => {
 
     if (err) toast.error(err.message);
     if (response && response.user && response.user.displayName) {
-      // push vào list bình thường
       setListReviews([...listReviews, response]);
       setFilteredReviews([...filteredReviews, response]);
       setReviewCount((prev) => prev + 1);
       setContent("");
-    } else {
-      // Chỉ log warning (hoặc bỏ luôn, vì lúc load lại sẽ ok)
-      console.warn("Review response thiếu user/displayName!", response);
-      setListReviews([...listReviews, response]);
-      setFilteredReviews([...filteredReviews, response]);
+    } else if (response) {
+      // Gán user tạm thời từ redux cho review này, tránh crash
+      setListReviews([...listReviews, { ...response, user }]);
+      setFilteredReviews([...filteredReviews, { ...response, user }]);
       setReviewCount((prev) => prev + 1);
       setContent("");
     }
