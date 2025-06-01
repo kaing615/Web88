@@ -11,7 +11,6 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import CircularRate from "./CircularRate";
 
 const getPosterUrl = (posterPath) => {
-  if (!posterPath) return "/fallback.jpg";
   return `https://image.tmdb.org/t/p/w500${posterPath}`;
 };
 
@@ -52,12 +51,16 @@ const MediaItem = ({ media, mediaType }) => {
     >
       <Box
         sx={{
-          ...uiConfigs.style.backgroundImage(getPosterUrl(posterPath)),
-          paddingTop: "160%",
+          width: "300px",
+          aspectRatio: "2/3",
+          backgroundImage: `url(${getPosterUrl(posterPath)})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
           borderRadius: 3,
+          position: "relative",
           boxShadow: "0 8px 32px rgba(0,0,0,0.18)",
           overflow: "hidden",
-          position: "relative",
           cursor: "pointer",
           transition:
             "transform 0.22s cubic-bezier(.42,1,.46,1.14), box-shadow 0.17s",
@@ -96,10 +99,9 @@ const MediaItem = ({ media, mediaType }) => {
                 fontSize: "2rem",
                 zIndex: 999,
                 filter: "drop-shadow(0 1px 4px rgba(0,0,0,0.18))",
-                opacity: 0, // <-- Luôn hiện, hover có thể tăng sáng hoặc scale
+                opacity: 0,
                 transition: "opacity 0.18s, transform 0.2s",
-                pointerEvents: "none", // Để không cản các nút khác
-                // Hiệu ứng sáng hơn khi hover (tuỳ ý)
+                pointerEvents: "none",
                 "&:hover": {
                   opacity: 1,
                   transform: "scale(1.11)",

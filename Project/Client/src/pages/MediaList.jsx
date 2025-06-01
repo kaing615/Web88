@@ -6,11 +6,11 @@ import { useParams } from "react-router-dom";
 import tmdbConfigs from "../api/configs/tmdb.configs";
 import mediaApi from "../api/modules/media.api";
 import uiConfigs from "../configs/ui.configs";
-import userPrevious from "../hooks/userPrevious";
 import HeroSlide from "../components/common/HeroSlide";
 import MediaGrid from "../components/common/MediaGrid";
 import { setAppState } from "../redux/features/appStateSlice";
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
+import MediaSlide from "../components/common/MediaSlide";
 
 const MediaList = () => {
   const { mediaType } = useParams();

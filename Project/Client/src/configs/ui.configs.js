@@ -36,9 +36,7 @@ const uiConfigs = {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundColor: "darkgrey",
-            backgroundImage: imgPath
-                ? `url(https://image.tmdb.org/t/p/w500${imgPath})`
-                : "none",
+            backgroundImage: imgPath ? `url(https://image.tmdb.org/t/p/w500${imgPath})` : "none",
         }),
         size: {
             sidebarWidth: "300px",
