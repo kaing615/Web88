@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import MediaItem from "./MediaItem";
 
-const MediaGrid = ({ medias, mediaType, query }) => (
+const MediaGrid = ({ medias, mediaType }) => (
   <Grid container spacing={3} justifyContent="center">
     {medias.map((media, idx) => (
       <Grid

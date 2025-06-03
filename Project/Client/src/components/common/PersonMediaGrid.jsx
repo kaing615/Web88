@@ -69,7 +69,11 @@ const PersonMediaGrid = ({ personId }) => {
               marginBottom: "30px",
             }}
           >
-            <MediaItem media={media} mediaType={media.media_type} />
+            <MediaItem
+              media={media}
+              mediaType={media.media_type}
+              width="300px"
+            />
           </Grid>
         ))}
       </Grid>
