@@ -2,93 +2,74 @@ import axiosClient from "../axios/axios.client.js";
 import tmdbEndpoints from "./tmdb.endpoint.js";
 
 const tmdpApi = {
-    mediaList: async ({
+  mediaList: async ({ mediaType, mediaCategory, page }) =>
+    axiosClient.get(
+      tmdbEndpoints.mediaList({
         mediaType,
         mediaCategory,
-        page
-    }) => axiosClient.get(
-        tmdbEndpoints.mediaList({
-            mediaType,
-            mediaCategory,
-            page
-        })
+        page,
+      })
     ),
-    mediaDetail: async ({
+  mediaDetail: async ({ mediaType, mediaId }) =>
+    axiosClient.get(
+      tmdbEndpoints.mediaDetail({
         mediaType,
-        mediaId
-    }) => axiosClient.get(
-        tmdbEndpoints.mediaDetail({
-            mediaType,
-            mediaId
-        })
+        mediaId,
+      })
     ),
-    mediaGenres: async ({
-        mediaType
-    }) => axiosClient.get(
-        tmdbEndpoints.mediaGenres({
-            mediaType
-        })
-    ),
-    mediaCredits: async ({
+  mediaGenres: async ({ mediaType }) =>
+    axiosClient.get(
+      tmdbEndpoints.mediaGenres({
         mediaType,
-        mediaId
-    }) => axiosClient.get(
-        tmdbEndpoints.mediaCredits({
-            mediaType,
-            mediaId
-        })
+      })
     ),
-    mediaVideos: async ({
+  mediaCredits: async ({ mediaType, mediaId }) =>
+    axiosClient.get(
+      tmdbEndpoints.mediaCredits({
         mediaType,
-        mediaId
-    }) => axiosClient.get(
-        tmdbEndpoints.mediaVideos({
-            mediaType,
-            mediaId
-        })
+        mediaId,
+      })
     ),
-    mediaRecommend: async ({
+  mediaVideos: async ({ mediaType, mediaId }) =>
+    axiosClient.get(
+      tmdbEndpoints.mediaVideos({
         mediaType,
-        mediaId
-    }) => axiosClient.get(
-        tmdbEndpoints.mediaRecommend({
-            mediaType,
-            mediaId
-        })
+        mediaId,
+      })
     ),
-    mediaImages: async ({
+  mediaRecommend: async ({ mediaType, mediaId }) =>
+    axiosClient.get(
+      tmdbEndpoints.mediaRecommend({
         mediaType,
-        mediaId
-    }) => axiosClient.get(
-        tmdbEndpoints.mediaImages({
-            mediaType,
-            mediaId
-        })
+        mediaId,
+      })
     ),
-    mediaSearch: async ({
+  mediaImages: async ({ mediaType, mediaId }) =>
+    axiosClient.get(
+      tmdbEndpoints.mediaImages({
+        mediaType,
+        mediaId,
+      })
+    ),
+  mediaSearch: async ({ mediaType, query, page }) =>
+    axiosClient.get(
+      tmdbEndpoints.mediaSearch({
         mediaType,
         query,
-        page
-    }) => axiosClient.get(
-        tmdbEndpoints.mediaSearch({
-            mediaType,
-            query,
-            page
-        })
+        page,
+      })
     ),
-    personDetail: async ({
-        personId
-    }) => axiosClient.get(
-        tmdbEndpoints.personDetail({
-            personId
-        })
+  personDetail: async ({ personId }) =>
+    axiosClient.get(
+      tmdbEndpoints.personDetail({
+        personId,
+      })
     ),
-    personMedias: async ({
-        personId
-    }) => axiosClient.get(
-        tmdbEndpoints.personMedias({
-            personId
-        })
+  personMedias: async ({ personId }) =>
+    axiosClient.get(
+      tmdbEndpoints.personMedias({
+        personId,
+      })
     ),
 };
 

@@ -9,12 +9,13 @@ import favoriteUtils from "../../utils/favorite.utils";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import CircularRate from "./CircularRate";
+import PersonIcon from "@mui/icons-material/Person";
 
 const getPosterUrl = (posterPath) => {
   return `https://image.tmdb.org/t/p/w500${posterPath}`;
 };
 
-const MediaItem = ({ media, mediaType }) => {
+const MediaItem = ({ media, mediaType, width = "100%" }) => {
   const { listFavorites } = useSelector((state) => state.user);
 
   const [title, setTitle] = useState("");
@@ -51,7 +52,7 @@ const MediaItem = ({ media, mediaType }) => {
     >
       <Box
         sx={{
-          width: "300px",
+          width: width,
           aspectRatio: "2/3",
           backgroundImage: `url(${getPosterUrl(posterPath)})`,
           backgroundSize: "cover",
@@ -151,7 +152,11 @@ const MediaItem = ({ media, mediaType }) => {
             },
           }}
         >
-          <PlayArrowIcon sx={{ fontSize: 32 }} />
+          {mediaType === "people" ? (
+            <PersonIcon sx={{ fontSize: 32 }} />
+          ) : (
+            <PlayArrowIcon sx={{ fontSize: 32 }} />
+          )}
         </IconButton>
 
         {/* Thông tin phim */}

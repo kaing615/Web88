@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { setAuthModalOpen } from "../../redux/features/authModalSlice";
 
-function ProtectedPage() {
+function ProtectedPage({ children }) {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 

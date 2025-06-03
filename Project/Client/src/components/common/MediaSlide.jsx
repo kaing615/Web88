@@ -46,7 +46,6 @@ const MediaSlide = ({ mediaType, mediaCategory }) => {
             fav.mediaId.toString() === (media.id || media.mediaId).toString()
         )
       );
-      console.log("Phim đã thích:", liked);
     }
   }, [medias, listFavorites]);
 

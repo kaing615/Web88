@@ -25,7 +25,6 @@ const MediaList = () => {
   const mediaCategories = useMemo(() => ["popular", "top_rated"], []);
   const category = ["popular", "top_rated"];
 
-  // 1. Reset page/category khi đổi mediaType
   useEffect(() => {
     setCurrPage(1);
     setCurrCategory(0);
@@ -33,7 +32,6 @@ const MediaList = () => {
     dispatch(setAppState(mediaType));
   }, [mediaType, dispatch]);
 
-  // 2. Gọi API khi page/category/mediaType đổi
   useEffect(() => {
     const getMedias = async () => {
       if (currPage === 1) dispatch(setGlobalLoading(true));
@@ -47,8 +45,6 @@ const MediaList = () => {
 
       setMediaLoading(false);
       dispatch(setGlobalLoading(false));
-
-      console.log("FULL RESPONSE:", response);
 
       if (err) {
         console.log(err.message);
@@ -64,6 +60,8 @@ const MediaList = () => {
     getMedias();
   }, [mediaType, currCategory, currPage, mediaCategories, dispatch]);
 
+  useEffect(() => {}, []);
+
   const onCategoryChange = (categoryIndex) => {
     if (currCategory === categoryIndex) return;
     setMedias([]);
@@ -72,8 +70,6 @@ const MediaList = () => {
   };
 
   const onLoadMore = () => setCurrPage(currPage + 1);
-
-  console.log("Danh sách phim truyền vào MediaGrid:", medias);
 
   return (
     <>
